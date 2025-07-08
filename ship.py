@@ -21,7 +21,10 @@ class Ship:
         self.rect.midbottom = self.boundaries.midbottom
         self.moving_right = False
         self.moving_left = False
+        self.moving_up = False
+        self.moving_down = False
         self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
         self.arsenal = arsenal
 
     def update (self):
@@ -35,8 +38,19 @@ class Ship:
             self.x += temp_speed
         if self.moving_left and self.rect.left > self.boundaries.left:
             self.x -= temp_speed
+        if self.moving_up:
+            if self.rect.left == self.boundaries.left and self.rect.top > self.boundaries.top:
+                self.y -= temp_speed
+            if self.rect.right == self.boundaries.right and self.rect.top > self.boundaries.top:
+                self.y -= temp_speed
+        if self.moving_down:
+            if self.rect.left == self.boundaries.left and self.rect.bottom < self.boundaries.bottom:
+                self.y += temp_speed
+            if self.rect.right == self.boundaries.right and self.rect.bottom < self.boundaries.bottom:
+                self.y += temp_speed
 
         self.rect.x = self.x
+        self.rect.y = self.y
 
     def draw(self):
         self.arsenal.draw()
