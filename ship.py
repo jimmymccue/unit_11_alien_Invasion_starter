@@ -16,6 +16,8 @@ class Ship:
         self.image = pygame.transform.scale(self.image, 
             (self.settings.ship_w, self.settings.ship_h)
             )
+        self.image_90_degrees = pygame.transform.rotate(self.image, 90)
+        self.image_270_degrees = pygame.transform.rotate(self.image, 270)
         
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.boundaries.midbottom
@@ -54,7 +56,13 @@ class Ship:
 
     def draw(self):
         self.arsenal.draw()
-        self.screen.blit(self.image, self.rect)
+        if self.rect.right == self.boundaries.right and self.rect.bottom < self.boundaries.bottom:
+            self.rect_90_derees = self.image_90_degrees.get_rect(center=self.rect.center)
+            self.screen.blit(self.image_90_degrees, self.rect_90_derees)
+        elif self.rect.left == self.boundaries.left and self.rect.bottom < self.boundaries.bottom:
+            self.screen.blit(self.image_270_degrees, self.rect)
+        else:
+            self.screen.blit(self.image, self.rect)
 
     def fire(self):
         return self.arsenal.fire_bullet()
