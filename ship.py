@@ -59,10 +59,14 @@ class Ship:
         if self.rect.right == self.boundaries.right and self.rect.bottom < self.boundaries.bottom:
             self.rect_90_derees = self.image_90_degrees.get_rect(center=self.rect.center)
             self.screen.blit(self.image_90_degrees, self.rect_90_derees)
+            self.settings.arsenal_shoot_left = True
         elif self.rect.left == self.boundaries.left and self.rect.bottom < self.boundaries.bottom:
             self.screen.blit(self.image_270_degrees, self.rect)
+            self.settings.arsenal_shoot_right = True
         else:
             self.screen.blit(self.image, self.rect)
+            self.settings.arsenal_shoot_right = False
+            self.settings.arsenal_shoot_left = False
 
     def fire(self):
         return self.arsenal.fire_bullet()

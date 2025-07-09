@@ -20,3 +20,6 @@ class Settings:
         self.bullet_w = 25
         self.bullet_h = 80
         self.bullet_amount = 5
+
+        self.arsenal_shoot_left = False
+        self.arsenal_shoot_right = False
