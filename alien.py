@@ -6,12 +6,12 @@ if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
 class Alien(Sprite):
-    def __init__(self, game: 'AlienInvasion', x: float, y: float):
+    def __init__(self, fleet: 'AlienInvasion', x: float, y: float):
         super().__init__()
-        self.game = game
-        self.screen = game.screen
-        self.boundaries = game.screen.get_rect()
-        self.settings = game.settings
+
+        self.screen = fleet.game.screen
+        self.boundaries = fleet.game.screen.get_rect()
+        self.settings = fleet.settings
 
         self.image = pygame.image.load(self.settings.alien_file)
         self.image = pygame.transform.scale(self.image, 
