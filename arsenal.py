@@ -5,8 +5,9 @@ from bullet import Bullet
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
+
 class Arsenal:
-    def __init__(self, game: 'AlienInvasion'):
+    def __init__(self, game: "AlienInvasion"):
         self.game = game
         self.settings = game.settings
         self.arsenal = pygame.sprite.Group()
@@ -17,7 +18,11 @@ class Arsenal:
 
     def _remove_bullets_offscreen(self):
         for bullet in self.arsenal.copy():
-            if bullet.rect.bottom <= 0 or bullet.rect.left <= 0 or bullet.rect.right <=0:
+            if (
+                bullet.rect.bottom <= 0
+                or bullet.rect.left <= 0
+                or bullet.rect.right <= 0
+            ):
                 self.arsenal.remove(bullet)
 
     def draw(self):
