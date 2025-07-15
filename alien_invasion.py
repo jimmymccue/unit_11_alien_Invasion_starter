@@ -79,6 +79,7 @@ class AlienInvasion:
     def _reset_level(self):
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
+        self.settings.fleet_difficulty_level += 1
         self.alien_fleet.create_fleet()
 
     def _update_screen(self):

@@ -28,9 +28,12 @@ class Settings:
         self.arsenal_shoot_left = False
         self.arsenal_shoot_right = False
 
-        self.alien_file = Path.cwd() / "Assets" / "images" / "enemy_4.png"
+        self.alien_image = Path.cwd() / "Assets" / "images" / "enemy_4.png"
+        self.asteroid_image = Path.cwd() / "Assets" / "images" / "Asteroid Brown.png"
+        self.alien_file = self.alien_image
         self.alien_w = 40
         self.alien_h = 40
         self.fleet_speed = 5
         self.fleet_direction = 1
         self.fleet_drop_speed = 10
+        self.fleet_difficulty_level = 1

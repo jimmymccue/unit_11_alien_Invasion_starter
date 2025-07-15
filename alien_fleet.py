@@ -31,9 +31,16 @@ class AlienFleet:
             alien_w, alien_h, screen_w, fleet_w, fleet_h
         )
 
-        self._create_rectangle_fleet(
-            alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset
-        )
+        if self.settings.fleet_difficulty_level % 2 == 0:
+            self._create_rectangle_fleet(
+                alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset
+            )
+            print("rectangle")
+        else:
+            self._create_checkered_fleet(
+                alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset
+            )
+            print("checkered")
 
     def _create_rectangle_fleet(
         self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset
@@ -44,6 +51,27 @@ class AlienFleet:
                 current_y = alien_h * row + y_offset
                 if col % 2 == 0 or row % 2 == 0:
                     continue
+                self._create_alien(current_x, current_y)
+
+
+    def _create_checkered_fleet(
+        self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset
+    ):
+        for row in range(fleet_h):
+            for col in range(fleet_w):
+                # This adds space between aliens by skipping even rows/cols
+                if col % 2 == 0 or row % 2 == 0:
+                    continue
+
+                current_x = alien_w * col + x_offset
+                current_y = alien_h * row + y_offset
+
+                # Alternate alien images based on position
+                if ((row // 2) + (col // 2)) % 2 == 0:
+                    self.settings.alien_file = self.settings.asteroid_image
+                else:
+                    self.settings.alien_file = self.settings.alien_image
+
                 self._create_alien(current_x, current_y)
 
     def calculate_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h):
